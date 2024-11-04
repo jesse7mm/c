@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <math.h>
+
+#define M_PI 3.14159265358979323846
+const double PI = M_PI;
+const double LOAD_FACTOR = 0.74;
+
+int main() {
+    double marbleRadius, marbleVolume;
+    int bowlVolume, numMarbles;
+    int totalMarbles = 0;  
+    int numEntries = 0;    
+    char runAgain;         
+
+    printf("Welcome to the Assignment 4 Marble Calculator!\n");
+
+    do {
+        // marble radius
+        printf("Enter the radius of a marble (in cm): ");
+        scanf("%lf", &marbleRadius);
+
+        // volume
+        printf("Enter the volume of the bowl (in mL): ");
+        scanf("%d", &bowlVolume);
+
+        // Calculate marble volume 
+        marbleVolume = (4.0 / 3.0) * PI * pow(marbleRadius, 3);
+
+        // Calculate the number of marbles that fit in the volume
+        numMarbles = (int)(LOAD_FACTOR * (bowlVolume / marbleVolume));
+
+        // show number of marbles that will fit
+        printf("Estimated number of marbles that fit in the bowl: %d\n", numMarbles);
+
+        totalMarbles += numMarbles;
+        numEntries++;
+
+        // Ask user
+        printf("Would you like to add another entry? (y/n): ");
+        scanf(" %c", &runAgain);
+
+    } while (runAgain == 'y' || runAgain == 'Y');
+
+    // Calculate
+    if (numEntries > 0) {
+        int averageMarbles = totalMarbles / numEntries;
+        printf("\nYou entered data for %d bowl(s).\n", numEntries);
+        printf("Average number of marbles per bowl: %d\n", averageMarbles);
+    } else {
+        printf("Oopsie!  Try again.\n");
+    }
+
+    printf("Thank you for using the Marble Calculator. Come back when you have more marbles.  Goodbye!\n");
+
+    return 0;
+}
